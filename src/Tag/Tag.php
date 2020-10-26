@@ -16,6 +16,7 @@ namespace Phalcon\Tag;
 use Phalcon\Di\Di;
 use Phalcon\Di\DiInterface;
 use Phalcon\Escaper\EscaperInterface;
+
 //use Phalcon\Http\ResponseInterface;
 //use Phalcon\Html\Link\Link;
 //use Phalcon\Html\Link\Serializer\Header;
@@ -99,12 +100,12 @@ class Tag
     /**
      * @var EscaperInterface|null
      */
-    protected static ?EscaperInterface $escaperService;
+    protected static $escaperService;
 
     /**
      * @var UrlInterface|null
      */
-    protected static ?UrlInterface $urlService;
+    protected static $urlService;
 
     /**
      * Appends a text to current document title
@@ -1036,6 +1037,21 @@ class Tag
     public static function renderTitle(bool $prepend = true, bool $append = true): string
     {
         return '<title>' . self::getTitle($prepend, $append) . '</title>' . PHP_EOL;
+    }
+
+    /**
+     * Resets the request and internal values to avoid those fields will have
+     * any default value.
+     *
+     * @deprecated Will be removed in 4.0.0
+     */
+    public static function resetInput(): void
+    {
+        self::$displayValues          = [];
+        self::$documentTitle          = null;
+        self::$documentAppendTitle    = [];
+        self::$documentPrependTitle   = [];
+        self::$documentTitleSeparator = null;
     }
 
     /**

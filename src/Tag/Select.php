@@ -54,13 +54,17 @@ abstract class Select
             $params = $parameters;
         }
 
-        $id = $params[0] ?? $params['id'];
+        $id = $params[0] ?? null;
+
+        if(null === $id) {
+            $params[0] = $params['id'];
+        }
 
         /**
          * Automatically assign the id if the name is not an array
          */
         if (true !== strpos($id, '[')) {
-            if (!isset($params['id'])) {
+            if (true !== isset($params['id'])) {
                 $params['id'] = $id;
             }
         }
