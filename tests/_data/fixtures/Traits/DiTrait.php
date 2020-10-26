@@ -24,7 +24,6 @@ namespace Phalcon\Tests\Fixtures\Traits;
 //use Phalcon\Db\Adapter\PdoFactory;
 //use Phalcon\Di;
 //use Phalcon\Di\DiInterface;
-//use Phalcon\Escaper;
 //use Phalcon\Events\Manager as EventsManager;
 //use Phalcon\Filter;
 //use Phalcon\Http\Request;
@@ -46,6 +45,7 @@ use Phalcon\Di\Di;
 use Phalcon\Di\DiInterface;
 use Phalcon\Di\FactoryDefault;
 use Phalcon\Di\FactoryDefault\Cli as CliFactoryDefault;
+use Phalcon\Escaper\Escaper;
 use Phalcon\Session\Adapter\Libmemcached as SessionLibmemcached;
 use Phalcon\Session\Adapter\Noop as SessionNoop;
 use Phalcon\Session\Adapter\Redis as SessionRedis;
@@ -163,8 +163,8 @@ trait DiTrait
 //                return new Crypt();
 //            case 'eventsManager':
 //                return new EventsManager();
-//            case 'escaper':
-//                return new Escaper();
+            case 'escaper':
+                return new Escaper();
             case 'factoryDefault':
                 return new FactoryDefault();
 //            case 'filter':
@@ -247,15 +247,15 @@ trait DiTrait
         switch ($service) {
 //            case 'annotations':
 //            case 'console':
-//            case 'escaper':
+            case 'escaper':
 //            case 'eventsManager':
 //            case 'filter':
 //            case 'modelsManager':
 //            case 'modelsMetadata':
 //            case 'request':
 //            case 'response':
-//                $this->container->set($service, $class);
-//                break;
+                $this->container->set($service, $class);
+                break;
 //            case 'crypt':
 //                $this->container->set(
 //                    'crypt',
